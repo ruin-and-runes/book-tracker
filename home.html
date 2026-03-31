@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>My Book Tracker</title>
+<link rel="stylesheet" href="{% static 'css/dark.css' %}">
+</head>
+
+<body>
+
+<h1>My Books</h1>
+
+<!-- NAV -->
+<div class="nav-menu">
+<a href="/">Home</a>
+<a href="#">TBR</a>
+<a href="#">Tropes</a>
+<a href="?random=1">Random</a>
+</div>
+
+<!-- SEARCH -->
+<div class="search-bar">
+<form method="GET">
+<input type="text" name="q" placeholder="Search books or tropes">
+<button type="submit">Search</button>
+</form>
+</div>
+
+<!-- RANDOM BOOK -->
+{% if random_book %}
+<h3>You should read next:</h3>
+
+<div class="book-card" style="width:160px;">
+<img src="https://covers.openlibrary.org/b/title/{{ random_book.title }}-M.jpg">
+
+<div class="book-title">{{ random_book.title }}</div>
+<div class="book-author">{{ random_book.author }}</div>
+
+</div>
+
+<hr>
+{% endif %}
+
+<!-- BOOK GRID -->
+
+<div class="book-grid">
+
+{% for item in books_with_covers %}
+
+<div class="book-card">
+
+<img src="{{ item.cover }}">
+
+<div class="book-title">{{ item.book.title }}</div>
+
+<div class="book-author">{{ item.book.author }}</div>
+
+<div>⭐ {{ item.book.rating }}</div>
+
+<div class="tropes">
+{% for trope in item.book.tropes.all %}
+<a href="?q={{ trope.name }}">{{ trope.name }}</a>{% if not forloop.last %}, {% endif %}
+{% endfor %}
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+/* PAGE */
+
+body{
+    font-family: Arial, sans-serif;
+    background:#fdf7fb;
+    margin:40px;
+}
+
+/* TITLE */
+
+h1{
+    margin-bottom:20px;
+}
+
+/* GRID */
+
+.book-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,180px);
+    gap:30px;
+}
+
+/* CARD */
+
+.book-card{
+    text-align:center;
+    background:white;
+    padding:15px;
+    border-radius:14px;
+    transition:all 0.25s ease;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* HOVER EFFECT (GLOW + LIFT) */
+
+.book-card:hover{
+    background:#ffe4ef;
+    transform:translateY(-4px);
+    box-shadow:0 8px 18px rgba(0,0,0,0.15);
+}
+
+/* BOOK COVER */
+
+.book-card img{
+    width:140px;
+    border-radius:10px;
+    transition:transform 0.25s ease;
+}
+
+/* IMAGE ZOOM */
+
+.book-card:hover img{
+    transform:scale(1.05);
+}
+
+/* TEXT */
+
+.book-title{
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.book-author{
+    color:#666;
+}
+
+/* LINKS */
+
+a{
+    color:#f4a6c1;
+    text-decoration:none;
+}
+
+a:hover{
+    color:#e889ad;
+}
+
+/* BUTTONS */
+
+button{
+    padding:6px 12px;
+    border-radius:8px;
+    border:none;
+    background:#f4a6c1;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#e889ad;
+}
+
+/* INPUT */
+
+input{
+    padding:6px;
+    border-radius:6px;
+    border:1px solid #ddd;
+}

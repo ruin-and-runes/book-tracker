@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Stats</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<h1>Reading Stats</h1>
+
+<div class="book-card" style="width:250px;">
+
+<p>Total Books: {{ total_books }}</p>
+
+<p>Read: {{ read_count }}</p>
+
+<p>Currently Reading: {{ reading_count }}</p>
+
+<p>TBR: {{ tbr_count }}</p>
+
+<p>Top Trope: {{ top_trope }}</p>
+
+</div>
+
+<a href="/">← Back</a>
+
+</body>
+</html>
