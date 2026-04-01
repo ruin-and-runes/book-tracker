@@ -27,7 +27,6 @@ class Migration(migrations.Migration):
                 ('rating', models.FloatField(blank=True, null=True)),
                 ('status', models.CharField(choices=[('read', 'Read'), ('tbr', 'To Be Read'), ('unreleased', 'Unreleased')], max_length=20)),
                 ('times_read', models.IntegerField(default=0)),
-                ('favorite_scene', models.TextField(blank=True)),
                 ('tropes', models.ManyToManyField(blank=True, to='books.trope')),
             ],
         ),
