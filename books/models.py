@@ -18,6 +18,7 @@ class Book(models.Model):
 
     notes = models.TextField(blank=True, null=True)
     progress = models.IntegerField(default=0)
+    status = models.CharField(max_length=20, default='read')
 
     # Cover options
     cover_url = models.URLField(blank=True, null=True)
