@@ -14,6 +14,7 @@ class Book(models.Model):
     rating = models.FloatField()
     shelf = models.CharField(max_length=20)
     tropes = models.ManyToManyField("Trope")
+    times_read = models.IntegerField(default=0)
 
     notes = models.TextField(blank=True, null=True)
     progress = models.IntegerField(default=0)
