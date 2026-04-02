@@ -28,12 +28,6 @@ class Migration(migrations.Migration):
 
         migrations.AddField(
             model_name='book',
-            name='notes',
-            field=models.TextField(blank=True, null=True),
-        ),
-
-        migrations.AddField(
-            model_name='book',
             name='cover_url',
             field=models.URLField(blank=True, null=True),
         ),
