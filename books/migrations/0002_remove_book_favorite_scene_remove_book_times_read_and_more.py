@@ -10,11 +10,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='book',
-            name='favorite_scene',
-        ),
-        migrations.RemoveField(
+            migrations.RemoveField(
             model_name='book',
             name='times_read',
         ),
