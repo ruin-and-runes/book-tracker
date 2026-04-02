@@ -28,7 +28,6 @@ class Book(models.Model):
     is_comfort = models.BooleanField(default=False)
     release_date = models.DateField(null=True, blank=True)
     is_released = models.BooleanField(default=True)
-    favorite_scene = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.title
