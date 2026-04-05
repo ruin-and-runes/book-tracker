@@ -169,7 +169,10 @@ def book_detail(request, book_id):
     })
 
 def reset_admin(request):
-    user = User.objects.get(username='admin')
-    user.set_password('admin123')
-    user.save()
-    return HttpResponse("Password reset")
+    try:
+        user = User.objects.get(username='admin')
+        user.set_password('admin123')
+        user.save()
+        return HttpResponse("Password reset")
+    except User.DoesNotExist:
+        return HttpResponse("Admin user not found")
