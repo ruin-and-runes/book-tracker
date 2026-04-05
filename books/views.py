@@ -4,6 +4,9 @@ from django.db.models import Count
 from django.db.models import Q
 import requests
 import random
+import json
+from django.http import HttpResponse
+from .models import Book
 
 
 def home(request):
@@ -165,4 +168,20 @@ def book_detail(request, book_id):
         "cover": cover_url,
         "css_file": css,
     })
+
+def load_books(request):
+    try:
+        with open('books.json') as f:
+            data = json.load(f)
+
+        for obj in data:
+            Book.objects.get_or_create(
+                id=obj['pk'],
+                defaults=obj['fields']
+            )
+
+        return HttpResponse("Books loaded successfully")
+
+    except Exception as e:
+        return HttpResponse(str(e))
 
