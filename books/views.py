@@ -2,8 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from .models import Book
 from django.db.models import Count
 import requests
-from django.contrib.auth.models import User
-from django.http import HttpResponse
 
 
 def home(request):
@@ -168,8 +166,3 @@ def home(request):
     return render(request, 'books/home.html')
 
 
-def create_admin(request):
-    if not User.objects.filter(username='admin').exists():
-        User.objects.create_superuser('admin', 'admin@example.com', 'admin123')
-        return HttpResponse("Admin created")
-    return HttpResponse("Admin already exists")
