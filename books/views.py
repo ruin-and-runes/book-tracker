@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Book
 from django.db.models import Count
 import requests
+import random
 
 
 def home(request):
@@ -23,7 +24,7 @@ def home(request):
     # SEARCH (FIXED)
     query = request.GET.get('q')
     if query:
-        books = books.filter(title_icontains=query) | books.filter(tropesname_icontains=query)
+        books = books.filter(title__icontains=query) | books.filter(tropes__name__icontains=query)
 
     # FETCH COVERS
     books_with_covers = []
@@ -32,15 +33,15 @@ def home(request):
 
         cover_url = None
 
-        # ✅ 1. PRIORITY: uploaded image
+        # 1. Uploaded image
         if hasattr(book, "cover_image") and book.cover_image:
             cover_url = book.cover_image.url
 
-        # ✅ 2. PRIORITY: manual URL
+        # 2. Manual URL
         elif hasattr(book, "cover_url") and book.cover_url:
             cover_url = book.cover_url
 
-        # ✅ 3. AUTO FETCH
+        # 3. Auto fetch
         else:
             try:
                 response = requests.get(
@@ -69,7 +70,7 @@ def home(request):
             except:
                 pass
 
-        # ✅ fallback
+        # fallback
         if not cover_url:
             cover_url = "https://via.placeholder.com/140x210?text=No+Cover"
 
@@ -78,9 +79,13 @@ def home(request):
             "cover": cover_url
         })
 
+    # RANDOM BOOK
+    random_book = random.choice(books) if books else None
+
     return render(request, "books/home.html", {
         "books_with_covers": books_with_covers,
         "css_file": css,
+        "random_book": random_book,
     })
 
 
@@ -127,7 +132,7 @@ def book_detail(request, book_id):
 
         book.save()
 
-    # SAME COVER LOGIC
+    # COVER LOGIC
     cover_url = None
 
     if hasattr(book, "cover_image") and book.cover_image:
@@ -159,10 +164,3 @@ def book_detail(request, book_id):
         "cover": cover_url,
         "css_file": css,
     })
-
-
-def home(request):
-    # example
-    return render(request, 'books/home.html')
-
-
