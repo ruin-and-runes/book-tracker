@@ -6,7 +6,7 @@ import requests
 import random
 import json
 from django.http import HttpResponse
-from .models import Book
+from .models import Book, Trope
 import json
 from django.http import HttpResponse
 from .models import Trope
