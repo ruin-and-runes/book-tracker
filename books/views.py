@@ -177,10 +177,20 @@ def load_books(request):
             data = json.load(f)
 
         for obj in data:
-            Book.objects.get_or_create(
+            fields = obj['fields'].copy()
+
+            # extract tropes
+            tropes_ids = fields.pop('tropes', [])
+
+            book, created = Book.objects.get_or_create(
                 id=obj['pk'],
-                defaults=obj['fields']
+                defaults=fields
             )
+
+            # set tropes properly
+            if tropes_ids:
+                tropes = Trope.objects.filter(id__in=tropes_ids)
+                book.tropes.set(tropes)
 
         return HttpResponse("Books loaded successfully")
 
