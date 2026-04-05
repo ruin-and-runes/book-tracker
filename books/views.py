@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Book
 from django.db.models import Count
+from django.db.models import Q
 import requests
 import random
 
@@ -24,7 +25,7 @@ def home(request):
     # SEARCH (FIXED)
     query = request.GET.get('q')
     if query:
-        books = books.filter(title__icontains=query) | books.filter(tropes__name__icontains=query)
+        books = books.filter(Q(title__icontains=query) | Q(tropes__name__icontains=query)).distinct()
 
     # FETCH COVERS
     books_with_covers = []
