@@ -213,4 +213,6 @@ def load_tropes(request):
     except Exception as e:
         return HttpResponse(str(e))
 
+books = Book.objects.all()[:50]
+
 
