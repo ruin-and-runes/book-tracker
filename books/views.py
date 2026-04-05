@@ -168,11 +168,16 @@ def book_detail(request, book_id):
         "css_file": css,
     })
 
+
 def reset_admin(request):
-    try:
-        user = User.objects.get(username='admin')
-        user.set_password('admin123')
-        user.save()
-        return HttpResponse("Password reset")
-    except User.DoesNotExist:
-        return HttpResponse("Admin user not found")
+    user, created = User.objects.get_or_create(username='admin')
+
+    user.set_password('admin123')
+    user.email = 'admin@example.com'
+    user.is_staff = True
+    user.is_superuser = True
+    user.save()
+
+    if created:
+        return HttpResponse("Admin CREATED")
+    return HttpResponse("Password RESET")
