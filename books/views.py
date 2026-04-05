@@ -7,6 +7,9 @@ import random
 import json
 from django.http import HttpResponse
 from .models import Book
+import json
+from django.http import HttpResponse
+from .models import Trope
 
 
 def home(request):
