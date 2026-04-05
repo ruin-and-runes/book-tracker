@@ -171,24 +171,9 @@ def book_detail(request, book_id):
         "cover": cover_url,
         "css_file": css,
     })
-
 def load_books(request):
     try:
-        with opdef load_tropes(request):
-    try:
-        with open('tropes.json') as f:
-            data = json.load(f)
-
-        for obj in data:
-            Trope.objects.get_or_create(
-                id=obj['pk'],
-                defaults=obj['fields']
-            )
-
-        return HttpResponse("Tropes loaded successfully")
-
-    except Exception as e:
-        return HttpResponse(str(e))en('books.json') as f:
+        with open('books.json') as f:
             data = json.load(f)
 
         for obj in data:
@@ -202,5 +187,20 @@ def load_books(request):
     except Exception as e:
         return HttpResponse(str(e))
 
+def load_tropes(request):
+    try:
+        with open('tropes.json') as f:
+            data = json.load(f)
+
+        for obj in data:
+            Trope.objects.get_or_create(
+                id=obj['pk'],
+                defaults=obj['fields']
+            )
+
+        return HttpResponse("Tropes loaded successfully")
+
+    except Exception as e:
+        return HttpResponse(str(e))
 
 
