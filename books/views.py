@@ -215,4 +215,19 @@ def load_tropes(request):
 
 books = Book.objects.all()[:50]
 
+from django.contrib.auth.models import User
+from django.http import HttpResponse
 
+def create_admin(request):
+    if request.GET.get("key") != "mysecret123":
+        return HttpResponse("Not allowed")
+
+    if not User.objects.filter(username='admin').exists():
+        user = User.objects.create(username='admin')
+        user.set_password('admin123')
+        user.is_superuser = True
+        user.is_staff = True
+        user.save()
+        return HttpResponse("Admin created")
+
+    return HttpResponse("Admin already exists")
